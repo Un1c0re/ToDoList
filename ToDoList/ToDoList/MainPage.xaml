@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toDoList="clr-namespace:ToDoList;assembly=ToDoList"
+             x:Class="ToDoList.MainPage"
+             x:DataType="toDoList:MainViewModel">
+
+    <StackLayout BackgroundColor="#22223B" Padding="15">
+        <Label
+            Margin="20"
+            HeightRequest="100"
+            FontSize="50"
+            Text="ToDoDoDo"
+            TextColor="#C3BEF7"
+            FontAttributes="Bold">
+                 
+        </Label>
+        
+        <CollectionView ItemsSource="{Binding Tasks}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type toDoList:Item}">
+                    
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <CheckBox 
+                            Grid.Column="0"
+                            Color="#23CE6B">
+                        </CheckBox>
+                        
+                        <Label
+                            Padding="5"
+                            FontSize="24"
+                            TextColor="white"
+                            Text ="{Binding}" Grid.Column="1">
+                        
+                        </Label>
+                        
+                        <Button 
+                            WidthRequest="46"
+                            HeightRequest="36"
+                            Text ="x" 
+                            FontSize="24"
+                            Padding="1"
+                            FontAttributes="Bold"
+                            BackgroundColor="#22223B" 
+                            TextColor="#F02D3A"
+                            Command="{Binding Source=
+                                {RelativeSource AncestorType={x:Type toDoList:MainViewModel}},
+                                Path=RemoveTask}" 
+                                CommandParameter="{Binding}" Grid.Column="2">
+                        </Button>
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Entry 
+            TextColor="White"
+            FontSize="24"
+            PlaceholderColor="#748CAB"
+            Placeholder="Input the task"
+            ReturnCommand="{Binding AddTask}" ReturnCommandParameter=
+               "{Binding Source = {RelativeSource Self}, Path = Text}">
+        </Entry>
+    </StackLayout>
+
+</ContentPage>
